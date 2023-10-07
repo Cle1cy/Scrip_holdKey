@@ -1,33 +1,29 @@
 from pynput import keyboard as kb
+import pyautogui
 
-class Teclas:
+key_press = False
+key_user = ""
+typing_active = False  # Variable para rastrear si estás escribiendo con pyautogui
 
-    __key_press = False
-    __key_stop = False
-    __key_user = ""
-    
-    def __init__(self,key_user):
-        self.__key_user = key_user
-    
-    def get_Key_user(self):
-        return self.key_user
-    
-    def set_Key_user(self, key_user):
-        self.__key_user = key_user
-        
-    def key_parse(key_user):
-        key_user = str(key_user)
-        key_user= key_user[1]
-        return key_user
-    
-    def press(key):   #Get if you are pressing the "q" key
-        Teclas.key_parse(key)
-        print('KEY' + key_parse)
+def parse_key(key):
+    key = str(key)
+    key = key[1]
+    return key
 
-    def stop(key):  #Get if you stoped to press the "q" key
-        print('stop Key ' + str(key))
-
-
-    with kb.Listener(press, stop) as listener:
-    	listener.join()
+def press(key):
+    global typing_active
     
+    if parse_key(key) == 'q':
+        typing_active = True
+        pyautogui.write('q') 
+
+def stop(key):
+    global typing_active
+    
+    if typing_active:
+        typing_active = False
+    else:
+        print("se paró de presionar " + parse_key(key))
+
+with kb.Listener(press, stop) as listener:
+    listener.join()
