@@ -1,9 +1,7 @@
 from pynput import keyboard as kb
-import pyautogui
+from pynput.keyboard import Key, Controller
 
-key_press = False
-key_user = ""
-typing_active = False  # Variable para rastrear si estás escribiendo con pyautogui
+keyboard = Controller()
 
 def parse_key(key):
     key = str(key)
@@ -11,19 +9,14 @@ def parse_key(key):
     return key
 
 def press(key):
-    global typing_active
-    
     if parse_key(key) == 'q':
-        typing_active = True
-        pyautogui.write('q') 
-
-def stop(key):
-    global typing_active
-    
-    if typing_active:
-        typing_active = False
+        keyboard.press('q')
     else:
-        print("se paró de presionar " + parse_key(key))
-
+        exit()
+    
+        
+def stop(key):
+    print("se paró de presionar " + parse_key(key))
+    
 with kb.Listener(press, stop) as listener:
     listener.join()
