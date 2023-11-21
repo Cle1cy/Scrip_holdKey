@@ -1,5 +1,9 @@
-# Macro-Frost
+# V0.1
+Esy tool scrip for repete the accion of a key.
 
-- Are you tire of seeking for a good macro with out risky, tray this.
-- This is a open source macro made for HCE players in albion but also can work gor anyone take a look of what it does.
-- Give a key to the program ant it´s working, while you´r pres the key it going to proes infinity individuals keys of the same as you´r selected key.
+# How it works?
+While you are pressing the q key it will be presed in infinity individual instance while you are holding that key
+
+# Just open the file HoldKey.ex and it will work 
+
+
