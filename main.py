@@ -14,8 +14,8 @@ def on_press(key):
         
 def on_release(key):
     print("se paró de presionar " + parse_key(key))
-    if key == kb.Key.esc:
-        return False
+    #if key == kb.Key.esc:
+       # return False
     
 with kb.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
