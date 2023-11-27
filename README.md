@@ -1,5 +1,4 @@
-# V0.2
-Esy tool scrip for repete the accion of a key.
+# Easy tool scrip for repete the accion of a key.
 
 # How download it?
 Go to release notes, download the .rar file then just floww the below instructions
