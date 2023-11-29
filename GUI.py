@@ -38,18 +38,20 @@ class CustomListener(threading.Thread):
         key = str(key)
         key = key[1]
         return key
-   
+
     def on_press(self, key):
-        if loop_active and self.parse_key(key) == 'q':
-            self.keyboard.release('q')
-        elif loop_active and self.parse_key(key) == self.selected_key:
-            self.keyboard.press('q')
-            self.keyboard.release('q')
-            
+        if loop_active:
+            if self.parse_key(key) == 'q' and loop_active and self.parse_key(key) == self.selected_key:
+                self.keyboard.release('q')
+            elif loop_active and self.parse_key(key) == self.selected_key:
+                self.keyboard.press('q')
+                self.keyboard.release('q')
+                
     def on_release(self, key):
-        print("Se dejó de presionar " + self.parse_key(key))
-        if key == kb.Key.esc:
-            return False
+        #print("Se dejó de presionar " + self.parse_key(key))
+        #if key == kb.Key.esc:  #Debug for stop the program 
+            #return False
+        return True
 
     def update_behavior(self, selected_key):
         self.selected_key = selected_key
