@@ -12,7 +12,7 @@ def save_selection():
     global loop_active
     global current_listener
     selected_key = key_entry.get()
-    print(selected_key)
+    selected_key = selected_key.lower()
     if(selected_key == ''):
         label_result.config(text=f"No hay ninguna tecla seleccionada")
     else:
@@ -45,9 +45,12 @@ class CustomListener(threading.Thread):
 
     def on_press(self, key):
         if loop_active:
-            if self.parse_key(key) == 'q' and loop_active and self.parse_key(key) == self.selected_key:
+            key_lower = self.parse_key(key)
+            key_lower = key_lower.lower() #Convertimos cualquier entrada en minuscula
+            print(key_lower)
+            if key_lower == 'q' and loop_active and key_lower== self.selected_key:
                 self.keyboard.release('q')
-            elif loop_active and self.parse_key(key) == self.selected_key:
+            elif loop_active and key_lower == self.selected_key:
                 self.keyboard.press('q')
                 self.keyboard.release('q')
                 
@@ -81,16 +84,16 @@ root.geometry(f"{widget_width}x{widget_height}+{screen_width // 2 - widget_width
 root.resizable(True, True)  # Permitir redimensionar en ambos ejes
 
 # Variables
-key_entry = tk.Entry(root, justify='center', font=("Century Gothic", 16, "bold"), fg='#22092C', bg='#FFFBF5')  # Cambiar la fuente y tamaño del Entry
+key_entry = tk.Entry(root, justify='center', font=("Century Gothic", 16, "bold"), fg='#64CCC5', bg='#FFFBF5')  # Cambiar la fuente y tamaño del Entry
 entry_width = int(widget_width * 0.75)  # Tamaño del Entry (75% del widget)
 key_entry.config(width=entry_width)
 
 # Botón para guardar la selección
-save_button = tk.Button(root, text="Guardar Selección", command=save_selection, font=("Century Gothic", 16, "bold"), bg='#22092C', fg='#FFFBF5')  # Cambiar colores y fuente del botón
+save_button = tk.Button(root, text="Guardar Selección", command=save_selection, font=("Century Gothic", 16, "bold"), bg='#64CCC5', fg='#FFFBF5')  # Cambiar colores y fuente del botón
 
 # Etiqueta y campo de entrada para la tecla
-label_key = tk.Label(root, text="Selecciona una tecla", font=("Century Gothic", 16, "bold"), fg='#22092C', bg='#FFFBF5')  # Cambiar tamaño y fuente de la etiqueta
-label_result = tk.Label(root, text="No hay ninguna tecla seleccionada ", font=("Century Gothic", 16, "bold"), fg='#22092C', bg='#FFFBF5')  # Cambiar tamaño y fuente de la etiqueta
+label_key = tk.Label(root, text="Selecciona una tecla", font=("Century Gothic", 16, "bold"), fg='#64CCC5', bg='#FFFBF5')  # Cambiar tamaño y fuente de la etiqueta
+label_result = tk.Label(root, text="No hay ninguna tecla seleccionada ", font=("Century Gothic", 16, "bold"), fg='#64CCC5', bg='#FFFBF5')  # Cambiar tamaño y fuente de la etiqueta
 
 # Posicionamiento de los widgets en la ventana
 label_key.pack(pady=10)  # Añadir espacio entre widgets
